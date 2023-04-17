@@ -1,13 +1,16 @@
 package com.kreuzfeuer.mirea.trpp.final_project.entity;
 
+import com.kreuzfeuer.mirea.trpp.final_project.entity.enums.BookRating;
 import com.kreuzfeuer.mirea.trpp.final_project.entity.enums.BookStatus;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 
-@Entity(name = "Book")
+@Entity
 @Table(name = "book")
-public class Book {
+@Data
+public class Book{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,7 +26,16 @@ public class Book {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private BookStatus status;
+    private BookStatus status = BookStatus.PLANNED;
 
+    @Enumerated(EnumType.STRING)
+    private BookRating rating;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
+
+    @PrePersist
+    private void init(){
+        dateAdded = LocalDate.now();
+    }
 }
