@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/book-update}" th:object="${book}" method="post">
+    <br/>
+    <label for="BookName">Book Name</label>
+    <input type="text" th:field="*{bookName}" id="BookName" th:placeholder="${book.getBookName()}">
+    <br/>
+    <label for="author">Author</label>
+    <input type="text" th:field="*{author}" id="author" th:placeholder="${book.getAuthor()}">
+    <br/>
+    <label for="description">Description</label>
+    <input type="text" th:field="*{description}" id="description" th:placeholder="${book.getDescription()}">
+    <br/>
+    <select name="Status">
+        <option th:each="status : ${T(com.kreuzfeuer.mirea.trpp.final_project.entity.enums.BookStatus).values()}"
+                th:value="${status}" th:text="${status}" th:placeholder="${book.getStatus()}"></option>
+    </select>
+    <select name="Rating">
+        <option th:each="rating : ${T(com.kreuzfeuer.mirea.trpp.final_project.entity.enums.BookRating).values()}"
+                th:value="${rating}" th:text="${rating}" th:placeholder="${book.getRating()}"></option>
+    </select>
+    <br/>
+    <input type="submit" value="Update book">
+</form>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:if="${message != null && !message.isBlank()}" >
+    <div th:utext="message"></div>
+    <br>
+</div>
+<form action="#" th:action="@{/book-add}" th:object="${book}" method="post">
+    <label for="Book Name">Name</label>
+    <input type="text" th:field="*{bookName}" id="Book Name" placeholder="Name">
+    <label for="author">Author</label>
+    <input type="text" th:field="*{author}" id="author" placeholder="author's name">
+    <label for="Description">Description</label>
+    <input type="text" th:field="*{description}" id="Description" placeholder="Description">
+    <select name="Status">
+        <option th:each="status : ${T(com.kreuzfeuer.mirea.trpp.final_project.entity.enums.BookStatus).values()}"
+                th:value="${status}" th:text="${status}"></option>
+    </select>
+    <select name="Rating">
+        <option th:each="rating : ${T(com.kreuzfeuer.mirea.trpp.final_project.entity.enums.BookRating).values()}"
+                th:value="${rating}" th:text="${rating}"></option>
+    </select>
+    <input type="submit" value="Create book">
+</form>
+
+</body>
+</html>

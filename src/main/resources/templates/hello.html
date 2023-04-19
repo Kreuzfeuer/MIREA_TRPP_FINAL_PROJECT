@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>The Reader's Notes</title>
+</head>
+<body>
+<h1>Welcome to the Reader's Notes</h1>
+
+<h3><a href="/registration">Registration page</a></h3>
+<br>
+<h3><a href="/login">Login page</a></h3>
+<br>
+<div sec:authorize="isAuthenticated()">
+    <a href="/user-note">Your note's</a>
+</div>
+
+</body>
+</html>

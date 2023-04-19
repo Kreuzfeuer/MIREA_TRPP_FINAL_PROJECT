@@ -32,6 +32,7 @@ public class Book{
     private BookRating rating;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @PrePersist
