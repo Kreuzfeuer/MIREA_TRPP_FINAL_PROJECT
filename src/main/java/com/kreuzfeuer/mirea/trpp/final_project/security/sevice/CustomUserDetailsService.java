@@ -1,6 +1,5 @@
-package com.kreuzfeuer.mirea.trpp.final_project.service;
+package com.kreuzfeuer.mirea.trpp.final_project.security.sevice;
 
-import com.kreuzfeuer.mirea.trpp.final_project.entity.User;
 import com.kreuzfeuer.mirea.trpp.final_project.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

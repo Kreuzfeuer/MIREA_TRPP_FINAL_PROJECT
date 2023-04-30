@@ -1,12 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>The Reader's Notes</title>
 </head>
+
+<style>
+    table, th, td {
+        border:1px solid black;
+    }
+</style>
+
 <body>
 <h2>Your note's</h2>
-<table>
+<a href="/">Main page</a>
+<br>
+<a href="/logout">Logout</a>
+
+
+<br>
+<br>
+<table style="width: 70%">
     <thead>
     <tr>
         <th>Date</th>
@@ -19,14 +33,14 @@
     </thead>
     <tbody>
     <tr th:each="book : ${books}">
-        <td th:text="${book.dateAdded}"></td>
-        <td th:text="${book.author}"></td>
-        <td th:text="${book.description}"></td>
-        <td th:text="${book.status}"></td>
-        <td th:text="${book.rating}"></td>
-        <td th:text="${book.status}"></td>
-        <td><a th:href="@{book-update/{id}(id=${book.id})}">Edit</a></td>
-        <td><a th:href="@{book-delete/{id}(id=${book.id})}">Delete</a></td>
+        <td th:text="${book.getDateAdded()}" ></td>
+        <td th:text="${book.getBookName()}"></td>
+        <td th:text="${book.getAuthor()}"></td>
+        <td th:text="${book.getDescription()}"></td>
+        <td th:text="${book.getStatus()}"></td>
+        <td th:text="${book.getRating()}"></td>
+        <td><a th:href="@{book-update/{id}(id=${book.getId()})}">Edit</a> </td>
+        <td><a th:href="@{book-delete/{id}(id=${book.getId()})}">Delete</a></td>
     </tr>
     </tbody>
 </table>

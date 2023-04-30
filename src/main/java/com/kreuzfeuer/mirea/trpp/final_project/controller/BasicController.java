@@ -2,8 +2,8 @@ package com.kreuzfeuer.mirea.trpp.final_project.controller;
 
 import com.kreuzfeuer.mirea.trpp.final_project.entity.Book;
 import com.kreuzfeuer.mirea.trpp.final_project.entity.User;
-import com.kreuzfeuer.mirea.trpp.final_project.service.BookServiceImpl;
-import com.kreuzfeuer.mirea.trpp.final_project.service.UserServiceImpl;
+import com.kreuzfeuer.mirea.trpp.final_project.service.impl.BookServiceImpl;
+import com.kreuzfeuer.mirea.trpp.final_project.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,19 +25,8 @@ public class BasicController {
     private final UserServiceImpl userService;
 
     @GetMapping("/")
-    public String startScreen(Model model) {
-        String login = new String();
-        model.addAttribute("login", login);
+    public String startScreen() {
         return "hello";
-    }
-
-    @PostMapping("/addNewBook")
-    public String addNewBook(Model model) {
-        Book book = new Book();
-
-        model.addAttribute("book", book);
-
-        return "";
     }
 
     @GetMapping("/user-note")
@@ -61,7 +50,7 @@ public class BasicController {
     }
 
     @GetMapping("/book-add")
-    public String addUserBookForm(Book book){
+    public String addUserBookForm(){
 
         return "book-add";
     }
@@ -70,9 +59,14 @@ public class BasicController {
     public String addUserBook(@Valid @ModelAttribute("book") Book book, BindingResult errors, Model model){
 
         if(errors.hasErrors()){
-            model.addAttribute("message", "Incorrect book information!");
+            model.addAttribute("errorMessage", "Incorrect book information!");
             return "book-add";
         }
+        if(book.getBookName().isBlank()){
+            model.addAttribute("errorMessage", "Title is blank!");
+            return "book-add";
+        }
+
         String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByLogin(userLogin);
 
@@ -88,6 +82,7 @@ public class BasicController {
         String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 
         Book book = bookService.findBookByIdAndUserLogin(id,userLogin);
+
         model.addAttribute("book",book);
 
         return "book-update";
@@ -97,8 +92,13 @@ public class BasicController {
     public String updateUserBook(@Valid @ModelAttribute("book") Book book, BindingResult errors, Model model){
 
         if(errors.hasErrors()){
-            model.addAttribute("message", "Incorrect book information!");
-            return "book-add";
+            model.addAttribute("errorMessage", "Incorrect book information!");
+            return "book-update";
+        }
+
+        if(book.getBookName().isBlank()){
+            model.addAttribute("errorMessage", "Title is blank!");
+            return "book-update";
         }
 
         bookService.save(book);

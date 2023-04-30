@@ -29,7 +29,7 @@ public class Book{
     private BookStatus status = BookStatus.PLANNED;
 
     @Enumerated(EnumType.STRING)
-    private BookRating rating;
+    private BookRating rating = BookRating.NONE;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")

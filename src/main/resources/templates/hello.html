@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>The Reader's Notes</title>
@@ -13,6 +13,8 @@
 <br>
 <div sec:authorize="isAuthenticated()">
     <a href="/user-note">Your note's</a>
+    <br>
+    <a href="/logout">Logout</a>
 </div>
 
 </body>

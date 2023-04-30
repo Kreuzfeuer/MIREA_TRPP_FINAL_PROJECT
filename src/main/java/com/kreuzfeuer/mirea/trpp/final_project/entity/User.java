@@ -21,16 +21,19 @@ import java.util.Set;
 public class User implements UserDetails {
     @Id
     @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true, nullable = false)
-    @Size(min = 3, max = 16, message = "Between 3 and 37 symbols")
+    @Size(min = 3, max = 16, message = "Login must be from 3 to 37 characters")
     private String login;
 
-    @Column(name = "password", length = 1000,nullable = false)
+    @Column(name = "password", nullable = false)
+    @Size(min = 3, message = "Password must be at least 3 characters long")
     private String password;
 
+    @Transient
+    private String confirmedPassword;
     @Column(name = "active")
     private boolean isActive;
 
@@ -39,15 +42,14 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 
-    @Transient
-    private String passwordConfirm;
 
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Book> books;
 
-    //security
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;

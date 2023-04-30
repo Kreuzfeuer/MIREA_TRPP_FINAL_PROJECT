@@ -1,0 +1,17 @@
+#spring:
+#  datasource:
+#    username: postgres
+#    password: 148
+#    url: jdbc:postgresql://localhost5433/course_work?currentSchema=course_work
+#    driver-class-name: org.postgresql.Driver
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#  sql:
+#    init:
+#      mode: always
+#      continue-on-error: false
+##      data-locations: расположение скрипта sql
+#server:
+#  port: 8088

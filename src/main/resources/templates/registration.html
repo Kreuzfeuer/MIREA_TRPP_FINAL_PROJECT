@@ -5,9 +5,14 @@
 </head>
 <body>
 <h2>Registration</h2>
-<div th:if="${!errorMessage.isEmpty()}" >
-    <div th:utext="errorMessage"></div>
+<div th:if="${errors}">
+    <div th:each="er : ${errors}">
+        <p th:utext="${er.getDefaultMessage()}"/></p>
+    </div>
     <br>
+</div>
+<div th:if="${errorMessage}">
+    <p th:utext="${errorMessage}"/>
 </div>
 
 <form th:action="@{/registration}" th:object="${user}" method="post">
@@ -21,8 +26,8 @@
             <td><label><input type="password" name="password"/></label></td>
         </tr>
         <tr>
-            <td><label text="Password Confirm">Password Confirm</label></td>
-            <td><label><input type="password" name="passwordConfirm"/></label></td>
+            <td><label text="Confirm Password">Confirm Password</label></td>
+            <td><label><input type="password" name="confirmedPassword"/></label></td>
         </tr>
         <tr>
             <td><input type="submit" value="Submit"/></td>

@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
-    Optional<List<Book>> getListBookByUserId(Long userId);
 
     Optional<List<Book>> getAllBookByUserLogin(String userLogin);
 

@@ -1,21 +1,22 @@
-package com.kreuzfeuer.mirea.trpp.final_project.service;
+package com.kreuzfeuer.mirea.trpp.final_project.service.impl;
 
 import com.kreuzfeuer.mirea.trpp.final_project.entity.User;
 import com.kreuzfeuer.mirea.trpp.final_project.entity.enums.Role;
 import com.kreuzfeuer.mirea.trpp.final_project.repository.UserRepository;
+import com.kreuzfeuer.mirea.trpp.final_project.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private  UserRepository repository;
+
+    private final UserRepository repository;
 
     /**
      * Search by id. Using the default JpaRepository implementation .
@@ -30,17 +31,24 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Transactional
     @Override
     public boolean createUser(User user) {
+
         String login = user.getLogin();
+
         if (repository.findByLogin(login).isPresent()) {
             return false;
         }
+
         user.setActive(true);
         user.getRoles().add(Role.ROLE_USER);
         user.setPassword(new BCryptPasswordEncoder(8).encode(user.getPassword()));
-        log.info("Saving new User with login: {}", login);
+
+
         repository.save(user);
+
+        log.info("Saving new User with login: {}", login);
         return true;
     }
 

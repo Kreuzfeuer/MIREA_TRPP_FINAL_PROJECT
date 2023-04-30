@@ -5,24 +5,34 @@
     <title>Title</title>
 </head>
 <body>
+<div th:if="${errorMessage}">
+    <p th:utext="${errorMessage}"/>
+</div>
+<br>
 <form action="#" th:action="@{/book-update}" th:object="${book}" method="post">
-    <br/>
+    <input type="text" th:field="*{id}" th:placeholder="${book.getId()}" hidden="hidden">
+
+    <input type="text" th:field="*{dateAdded}" th:placeholder="${book.dateAdded}" hidden="hidden">
+
+    <input type="text" th:field="*{user}" th:placeholder="${book.getUser()}" hidden="hidden">
+
     <label for="BookName">Book Name</label>
     <input type="text" th:field="*{bookName}" id="BookName" th:placeholder="${book.getBookName()}">
-    <br/>
+
     <label for="author">Author</label>
     <input type="text" th:field="*{author}" id="author" th:placeholder="${book.getAuthor()}">
-    <br/>
+
     <label for="description">Description</label>
     <input type="text" th:field="*{description}" id="description" th:placeholder="${book.getDescription()}">
-    <br/>
+
     <select name="Status">
         <option th:each="status : ${T(com.kreuzfeuer.mirea.trpp.final_project.entity.enums.BookStatus).values()}"
                 th:value="${status}" th:text="${status}" th:placeholder="${book.getStatus()}"></option>
     </select>
+
     <select name="Rating">
         <option th:each="rating : ${T(com.kreuzfeuer.mirea.trpp.final_project.entity.enums.BookRating).values()}"
-                th:value="${rating}" th:text="${rating}" th:placeholder="${book.getRating()}"></option>
+                th:value="${rating}" th:text="${rating}"></option>
     </select>
     <br/>
     <input type="submit" value="Update book">
