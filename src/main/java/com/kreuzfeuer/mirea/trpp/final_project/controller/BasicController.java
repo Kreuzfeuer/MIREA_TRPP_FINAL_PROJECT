@@ -50,8 +50,9 @@ public class BasicController {
     }
 
     @GetMapping("/book-add")
-    public String addUserBookForm(){
-
+    public String addUserBookForm(Model model){
+        Book book = new Book();
+        model.addAttribute("book",book);
         return "book-add";
     }
 
