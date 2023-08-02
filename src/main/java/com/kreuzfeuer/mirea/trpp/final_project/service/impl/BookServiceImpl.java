@@ -23,10 +23,9 @@ public class BookServiceImpl implements BookService {
     @Transactional
     @Override
     public void deleteBookByIdAndUserLogin(Long id, String userLogin) {
-        bookRepository.deleteBookByIdAndUserLogin(id,userLogin);
+        bookRepository.deleteBookByIdAndUserLogin(id, userLogin);
     }
 
-    @Transactional
     @Override
     public Book save(Book book) {
         return bookRepository.save(book);
@@ -35,7 +34,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book findBookByIdAndUserLogin(Long id, String userLogin) {
-        return bookRepository.findBookByIdAndUserLogin(id,userLogin);
+        return bookRepository.findBookByIdAndUserLogin(id, userLogin);
     }
 
 }
