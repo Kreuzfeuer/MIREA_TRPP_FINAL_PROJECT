@@ -3,11 +3,33 @@ version: '3.8'
 services:
 
   db:
-    image: postgres
+    image: postgres:15
     restart: always
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USERNAME: postgres
+      POSTGRES_USERNAME: "course"
       POSTGRES_PASSWORD: 148
       POSTGRES_DB: course_work
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - .:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U course -d course_work" ]
+      interval: 15s
+      timeout: 10s
+      retries: 7
+      start_period: 12s
+
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4GB
+
+  redis-sessions:
+    image: redis:7.2.1
+    restart: always
+    ports:
+      - '6379:6379'
+

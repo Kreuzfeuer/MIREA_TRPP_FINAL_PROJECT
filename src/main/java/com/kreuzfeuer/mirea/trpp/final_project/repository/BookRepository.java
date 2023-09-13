@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    Optional<List<Book>> getAllBookByUserLogin(String userLogin);
+    List<Book> getAllBookByUserLogin(String userLogin);
 
     @Modifying
     @Query(value = "DELETE FROM book B " +
@@ -21,6 +21,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
             nativeQuery = true)
     void deleteBookByIdAndUserLogin(@Param("id") Long id, @Param("login") String userLogin);
 
-    Book findBookByIdAndUserLogin(@Param("id") Long id, @Param("login") String userLogin);
+   Optional <Book> findBookByIdAndUserLogin(@Param("id") Long id, @Param("login") String userLogin);
 }
 

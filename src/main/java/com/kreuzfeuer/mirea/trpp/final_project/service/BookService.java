@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
+
 public interface BookService {
 
     List<Book> getListBookByUserLogin(String userLogin);
@@ -14,5 +15,5 @@ public interface BookService {
 
     Book save(Book book);
 
-    Book findBookByIdAndUserLogin(@Param("id") Long id, @Param("login") String userLogin);
+    Optional <Book> findBookByIdAndUserLogin(@Param("id") Long id, @Param("login") String userLogin);
 }

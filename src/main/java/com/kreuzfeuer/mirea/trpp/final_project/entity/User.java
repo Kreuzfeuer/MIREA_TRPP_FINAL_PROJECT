@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.IdGeneratorType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,13 +20,13 @@ import java.util.Set;
 @Getter
 @Setter
 public class User implements UserDetails {
+
     @Id
-    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true, nullable = false)
-    @Size(min = 3, max = 16, message = "Login must be from 3 to 37 characters")
+    @Size(min = 3, max = 16, message = "Login must be from 3 to 16 characters")
     private String login;
 
     @Column(name = "password", nullable = false)

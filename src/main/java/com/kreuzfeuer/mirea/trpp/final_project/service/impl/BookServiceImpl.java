@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,11 +18,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> getListBookByUserLogin(String userLogin) {
-        return bookRepository.getAllBookByUserLogin(userLogin).get();
+        return bookRepository.getAllBookByUserLogin(userLogin);
     }
 
-    @Transactional
     @Override
+    @Transactional
     public void deleteBookByIdAndUserLogin(Long id, String userLogin) {
         bookRepository.deleteBookByIdAndUserLogin(id, userLogin);
     }
@@ -33,7 +34,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book findBookByIdAndUserLogin(Long id, String userLogin) {
+    public Optional<Book> findBookByIdAndUserLogin(Long id, String userLogin) {
         return bookRepository.findBookByIdAndUserLogin(id, userLogin);
     }
 
