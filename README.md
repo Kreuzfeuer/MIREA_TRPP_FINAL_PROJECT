@@ -10,7 +10,12 @@ The application uses:
     4) Spring MVC;
     5) Spring Validation;
     6) Project Lambok;
-    7) Postgresql.
+    7) Spring Session with Redis;
+    8) Postgresql.
 
-## Intial command
-    mvn spring-boot:run
+## How to test this application
+You need to run Docker to run this application. 
+
+You can use a browser to test this application. Baseurl - `http://localhost:8088/`
+
+To run the application, use the Spring Boot Maven plugin: `mvn Spring-boot:run`
