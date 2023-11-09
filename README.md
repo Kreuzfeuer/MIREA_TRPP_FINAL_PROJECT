@@ -12,6 +12,7 @@ The application uses:
     6) Project Lambok;
     7) Spring Session with Redis;
     8) Postgresql.
+    9) Spring docker compose (there may be problems in this place)
 
 ## How to test this application
 You need to run Docker to run this application. 
